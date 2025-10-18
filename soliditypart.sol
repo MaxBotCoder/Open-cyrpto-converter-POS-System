@@ -4,7 +4,7 @@ pragma solidity 0.8.0;
 contract PosCode {
 
     //Variables
-    address constant private adminAddress = /* !Address of admin wallet or smart contract! */;
+    address constant private adminAddress = /*!Address of admin wallet or smart contract!*/;
     address private userAddress;
     uint private totalBalance;
 
