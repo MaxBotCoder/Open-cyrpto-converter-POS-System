@@ -1,36 +1,34 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.0;
 
-contract PosSide {
+contract PosCode {
 
     //Variables
-    address public lastToInteract;
-    address constant private adminAddress = EnterAdminAddressHere;
+    address constant public adminAddress = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
     address public userAddress;
     uint public totalBalance;
 
-    //debugging variables
-    uint public amountSentToUser;
-    uint public amountSentToAdmin;
+    //Mappings
+    mapping(address => uint) public balanceAllocated;
 
-    //mapping
-    mapping(address => uint) public moneyReservedForWhom;
-
-    //constructor
+    //Constructor
     constructor() {
         userAddress = msg.sender;
     }
-    
-    fallback() external payable {
-        lastToInteract = msg.sender; 
-        totalBalance += msg.value;
-        moneyReservedForWhom[userAddress] = msg.value/10;
-        payable(userAddress).call{value: moneyReservedForWhom[userAddress]}("");
-        amountSentToAdmin = totalBalance -= moneyReservedForWhom[userAddress];
-        totalBalance -= moneyReservedForWhom[userAddress];
-        payable(adminAddress).call{value: totalBalance}("");
-        amountSentToUser = totalBalance;
-        totalBalance -= totalBalance;
-    }
 
+    fallback() external payable {
+        //Allocate whole balance.
+        totalBalance = msg.value;
+        //Allocating balance to admin.
+        balanceAllocated[adminAddress] = totalBalance/10;
+        //Send allocated quanitty to admin.
+        payable(adminAddress).call{value: balanceAllocated[adminAddress]}("");
+        //Allocate balance to user.
+        balanceAllocated[userAddress] = totalBalance - balanceAllocated[adminAddress];
+        //Send allocated quantity to user.
+        payable(userAddress).call{value: balanceAllocated[userAddress]}("");
+        //Update balance left
+        totalBalance -= balanceAllocated[adminAddress];
+        totalBalance -= balanceAllocated[userAddress];
+    }
 }
