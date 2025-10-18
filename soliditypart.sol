@@ -4,12 +4,12 @@ pragma solidity 0.8.0;
 contract PosCode {
 
     //Variables
-    address constant public adminAddress = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
-    address public userAddress;
-    uint public totalBalance;
+    address constant private adminAddress = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+    address private userAddress;
+    uint private totalBalance;
 
     //Mappings
-    mapping(address => uint) public balanceAllocated;
+    mapping(address => uint) private balanceAllocated;
 
     //Constructor
     constructor() {
@@ -31,4 +31,5 @@ contract PosCode {
         totalBalance -= balanceAllocated[adminAddress];
         totalBalance -= balanceAllocated[userAddress];
     }
+
 }
