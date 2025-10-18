@@ -5,7 +5,7 @@ contract PosSide {
 
     //Variables
     address public lastToInteract;
-    address constant public adminAddress = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+    address constant public adminAddress = EnterAdminAddressHere;
     address public userAddress;
     uint public totalBalance;
 
