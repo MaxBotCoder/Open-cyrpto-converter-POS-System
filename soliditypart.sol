@@ -5,7 +5,7 @@ contract PosSide {
 
     //Variables
     address public lastToInteract;
-    address constant public adminAddress = EnterAdminAddressHere;
+    address constant private adminAddress = EnterAdminAddressHere;
     address public userAddress;
     uint public totalBalance;
 
