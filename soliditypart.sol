@@ -17,6 +17,7 @@ contract PosCode {
     }
 
     fallback() external payable {
+        require(msg.value <= 10, "Gwei quantity cannot be lower than 10.");
         //Allocate whole balance.
         totalBalance = msg.value;
         //Allocating balance to admin.
