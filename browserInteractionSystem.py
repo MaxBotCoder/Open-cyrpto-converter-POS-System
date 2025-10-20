@@ -2,6 +2,9 @@ from selenium import webdriver
 
 #This is just some test code for selenium!
 
-pageOpener = webdriver.Chrome()
+page_opener = webdriver.Chrome()
 
-pageOpener.get("https://youtube.com")
+page_opener.get("https://youtube.com")
+
+page_opener.quit()
+
