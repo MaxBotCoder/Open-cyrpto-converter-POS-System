@@ -1,10 +1,14 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from threads import Timer
 
-#This is just some test code for selenium!
+#Some test code!
 
-page_opener = webdriver.Chrome()
+url = (f"https://{input('inputurl: ')}")
+print(f"fetching {url}")
 
-page_opener.get("https://youtube.com")
+driver = webdriver.Chrome()
 
-page_opener.quit()
+driver.get(url)
+print(f"Success {driver.title} has been opened!")
 
